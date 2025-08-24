@@ -26,7 +26,6 @@ Users can create posts, follow/unfollow others, and engage with content through 
 ---
 
 ## 📦 Installation
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/yourusername/threads-network.git
-   cd threads-network
+First Create a virtual environment: python -m venv venv venv\Scripts\activate #for windows
+Run migrations: python manage.py makemigration python manage.py migrate
+Start developement server" python manage.py runserver
