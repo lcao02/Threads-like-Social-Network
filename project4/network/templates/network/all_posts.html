@@ -1,0 +1,58 @@
+{% extends "network/layout.html" %}
+
+{% block body %}
+<h2>All Posts</h2>
+
+<div id="posts-feed">
+    {% for post in page_obj %}
+        <div class="post" id="post-{{ post.id }}">
+            <p>
+                <strong>
+                    <a href="{% url 'profile' post.user.username %}">
+                        {{ post.user.username }}
+                    </a>
+                </strong> • {{ post.timestamp|date:"M d, Y H:i" }}
+            </p>
+
+            <p class="content">{{ post.content }}</p>
+
+            <p>
+                Likes: <span class="like-count">{{ post.likes }}</span>
+                {% if user.is_authenticated %}
+                    <button class="like-btn" data-id="{{ post.id }}">
+                        {% if user in post.liked_by.all %}
+                            Unlike
+                        {% else %}
+                            Like
+                        {% endif %}
+                    </button>
+                {% endif %}
+            </p>
+
+            {% if user == post.user %}
+                <button class="edit-btn" data-id="{{ post.id }}">Edit</button>
+            {% endif %}
+
+            <hr>
+        </div>
+    {% empty %}
+        <p>No posts yet.</p>
+    {% endfor %}
+</div>
+
+<!-- Pagination controls -->
+<div class="pagination">
+    {% if page_obj.has_previous %}
+        <a href="?page={{ page_obj.previous_page_number }}">Previous</a>
+    {% endif %}
+
+    <span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+
+    {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}">Next</a>
+    {% endif %}
+</div>
+
+{% load static %}
+<script src="{% static 'network/network.js' %}"></script>
+{% endblock %}

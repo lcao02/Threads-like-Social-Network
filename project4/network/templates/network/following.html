@@ -1,0 +1,45 @@
+{% extends "network/layout.html" %}
+
+{% block body %}
+<h2>Following</h2>
+
+<div id="posts-feed">
+    {% for post in page_obj %}
+        <div class="post">
+            <p>
+                <strong>
+                    <a href="{% url 'profile' post.user.username %}">{{ post.user.username }}</a>
+                </strong>
+            </p>
+            <p>{{ post.content }}</p>
+            <p><small>{{ post.timestamp }}</small></p>
+            <p>Likes: {{ post.likes }}</p>
+            <p class="content">{{ post.content }}</p>
+            {% if user == post.user %}
+                <button class="edit-btn" data-id="{{ post.id }}">Edit</button>
+            {% endif %}
+
+        </div>
+        <hr>
+    {% empty %}
+        <p>No posts yet.</p>
+    {% endfor %}
+</div>
+
+<!-- Pagination controls -->
+<div class="pagination">
+    {% if page_obj.has_previous %}
+        <a href="?page={{ page_obj.previous_page_number }}">Previous</a>
+    {% endif %}
+
+    <span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+
+    {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}">Next</a>
+    {% endif %}
+</div>
+
+{% load static %}
+<script src="{% static 'network/network.js' %}"></script>
+
+{% endblock %}

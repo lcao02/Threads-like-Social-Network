@@ -1,0 +1,13 @@
+#new-post-box {
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 15px;
+    background: #f9f9f9;
+    border-radius: 5px;
+}
+
+#post-content {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 5px;
+}

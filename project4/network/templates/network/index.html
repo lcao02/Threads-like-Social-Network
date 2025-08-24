@@ -1,0 +1,19 @@
+{% extends "network/layout.html" %}
+{% load static %}   <!-- make sure this is here so Django can find static files -->
+
+{% block body %}
+   <div id="new-post-box">
+      <h3>New Post</h3>
+      <textarea id="post-content" rows="3" placeholder="What's on your mind?"></textarea><br>
+      <button id="submit-post">Post</button>
+   </div>
+
+   <hr>
+
+   <div id="posts-feed">
+      <!-- Posts will appear here -->
+   </div>
+
+   <!-- Link your JavaScript file -->
+   <script src="{% static 'network/network.js' %}"></script>
+{% endblock %}
